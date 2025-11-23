@@ -16,8 +16,9 @@ public:
             return true;
         if(t1 == NULL || t2 == NULL)
             return false;
-       
-            return (t1->val == t2->val) &&  check(t1->left, t2->right) && check     (t1->right, t2->left);
+        if(t1->val != t2->val)
+            return false;
+        return check(t1->left, t2->right) && check(t1->right, t2->left);
     }
 
     bool isSymmetric(TreeNode* root) {
