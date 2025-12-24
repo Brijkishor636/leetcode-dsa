@@ -26,6 +26,38 @@
 // };
 
 
+// class Solution {
+// public:
+//     vector<int> postorderTraversal(TreeNode* root) {
+//         vector<int>arr;
+//         if(root == NULL){
+//             return arr;
+//         }
+//         stack<TreeNode*>st1;
+//         stack<TreeNode*>st2;
+//         st1.push(root);
+//         while(!st1.empty()){
+//             root = st1.top();
+//             st1.pop();
+//             st2.push(root);
+//             if(root->left != NULL){
+//                 st1.push(root->left);
+//             }
+//             if(root->right != NULL){
+//                 st1.push(root->right);
+//             }
+//         }
+//         while(!st2.empty()){
+//             root = st2.top();
+//             st2.pop();
+//             arr.push_back(root->val);
+//         }
+//         return arr;
+//     }
+// };
+
+// Using one stack--->
+
 class Solution {
 public:
     vector<int> postorderTraversal(TreeNode* root) {
@@ -33,25 +65,20 @@ public:
         if(root == NULL){
             return arr;
         }
-        stack<TreeNode*>st1;
-        stack<TreeNode*>st2;
-        st1.push(root);
-        while(!st1.empty()){
-            root = st1.top();
-            st1.pop();
-            st2.push(root);
+        stack<TreeNode*>st;
+        st.push(root);
+        while(!st.empty()){
+            root = st.top();
+            st.pop();
+            arr.push_back(root->val);
             if(root->left != NULL){
-                st1.push(root->left);
+                st.push(root->left);
             }
             if(root->right != NULL){
-                st1.push(root->right);
+                st.push(root->right);
             }
         }
-        while(!st2.empty()){
-            root = st2.top();
-            st2.pop();
-            arr.push_back(root->val);
-        }
+        reverse(arr.begin(), arr.end());
         return arr;
     }
 };
