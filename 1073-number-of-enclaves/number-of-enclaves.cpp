@@ -17,26 +17,38 @@ public:
                 }
             }
         }
+        int delrow[] = {+1, 0, -1, 0};
+        int delcol[] = {0, 1, 0, -1};
 
         while(!q.empty()){
             int row = q.front().first;
             int col = q.front().second;
             q.pop();
-            if(isPossible(row+1, col, grid, visited)){
-                q.push({row+1, col});
-                visited[row+1][col] = 1;
-            }
-            if(isPossible(row-1, col, grid, visited)){
-                q.push({row-1, col});
-                visited[row-1][col] = 1;
-            }
-            if(isPossible(row, col+1, grid, visited)){
-                q.push({row, col+1});
-                visited[row][col+1] = 1;
-            }
-            if(isPossible(row, col-1, grid, visited)){
-                q.push({row, col-1});
-                visited[row][col-1] = 1;
+
+            // if(isPossible(row+1, col, grid, visited)){
+            //     q.push({row+1, col});
+            //     visited[row+1][col] = 1;
+            // }
+            // if(isPossible(row-1, col, grid, visited)){
+            //     q.push({row-1, col});
+            //     visited[row-1][col] = 1;
+            // }
+            // if(isPossible(row, col+1, grid, visited)){
+            //     q.push({row, col+1});
+            //     visited[row][col+1] = 1;
+            // }
+            // if(isPossible(row, col-1, grid, visited)){
+            //     q.push({row, col-1});
+            //     visited[row][col-1] = 1;
+            // }
+
+            for(int i = 0; i < 4; i++){
+                int nrow = row+delrow[i];
+                int ncol = col + delcol[i];
+                if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m && visited[nrow][ncol] == 0 && grid[nrow][ncol] == 1){
+                    q.push({nrow, ncol});
+                    visited[nrow][ncol] = 1;
+                }
             }
         }
         int count = 0;
