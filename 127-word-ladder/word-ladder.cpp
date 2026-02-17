@@ -14,9 +14,9 @@ public:
                 if(temp == endWord){
                     return level;
                 }
-                for(char ch: "abcdefghijklmnopqrstuvwxyz"){
                     for(int i = 0; i < temp.size(); i++){
                         string s = temp;
+                        for(char ch = 'a'; ch <= 'z'; ch++){
                         s[i] = ch;
 
                         if(visited.find(s) == visited.end() && words.find(s) != words.end()){
