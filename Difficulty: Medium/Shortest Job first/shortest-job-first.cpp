@@ -1,19 +1,17 @@
-
-
 class Solution {
   public:
-    long long solve(vector<int>& bt) {
-        sort(bt.begin(), bt.end());
+    int solve(vector<int>& bt) {
         int n = bt.size();
-        vector<int>sum(n, 0);
-        sum[0] = bt[0];
-        for(int i = 0; i < n-1; i++){
-            sum[i+1] = bt[i+1] + sum[i];
+        sort(bt.begin(), bt.end());
+        vector<int>prefix(n, 0);
+        prefix[0] = bt[0];
+        for(int i = 1; i < n; i++){
+            prefix[i] = bt[i] + prefix[i-1];
         }
-        long long wt = 0;
+        int sum = 0;
         for(int i = 0; i < n-1; i++){
-            wt += sum[i];
+            sum += prefix[i];
         }
-        return wt/n;
+        return sum / n;
     }
 };
